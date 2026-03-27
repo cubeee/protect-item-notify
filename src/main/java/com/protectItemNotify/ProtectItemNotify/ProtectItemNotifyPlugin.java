@@ -10,12 +10,12 @@ import net.runelite.api.InventoryID;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.Prayer;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.gameval.VarbitID;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
-import net.runelite.api.Varbits;
 
 @Slf4j
 @PluginDescriptor(
@@ -54,7 +54,7 @@ public class ProtectItemNotifyPlugin extends Plugin
 	}
 
 	public boolean isInPVP() {
-		return client.getVar(Varbits.PVP_SPEC_ORB) == 1;
+		return client.getVarbitValue(VarbitID.PVP_AREA_CLIENT) == 1;
 	}
 
 	public boolean isProtectItemOn() {
