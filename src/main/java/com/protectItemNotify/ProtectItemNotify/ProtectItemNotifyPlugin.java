@@ -1,13 +1,9 @@
 package com.protectItemNotify.ProtectItemNotify;
 
 import com.google.inject.Provides;
-import com.protectItemNotify.ProtectItemNotify.ProtectItemNotifyOverlay;
-import java.util.Optional;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.InventoryID;
-import net.runelite.api.ItemContainer;
 import net.runelite.api.Prayer;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.gameval.VarbitID;
@@ -24,8 +20,6 @@ import net.runelite.client.ui.overlay.OverlayManager;
 public class ProtectItemNotifyPlugin extends Plugin
 {
 	@Inject private Client client;
-
-	@Inject private ProtectItemNotifyConfig config;
 
 	@Inject private ProtectItemNotifyOverlay protectItemNotifyOverlay;
 

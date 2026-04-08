@@ -1,15 +1,11 @@
 package com.protectItemNotify.ProtectItemNotify;
 
-import com.protectItemNotify.ProtectItemNotify.ProtectItemNotifyOverlay;
-import com.protectItemNotify.ProtectItemNotify.ProtectItemNotifyPlugin;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import javax.inject.Inject;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -24,7 +20,7 @@ public class ProtectItemNotifyOverlay extends Overlay {
     private final ProtectItemNotifyConfig protectItemConfig;
 
     @Inject
-    ProtectItemNotifyOverlay(ProtectItemNotifyPlugin plugin, ProtectItemNotifyConfig config) throws PluginInstantiationException {
+    ProtectItemNotifyOverlay(ProtectItemNotifyPlugin plugin, ProtectItemNotifyConfig config) {
         super(plugin);
         setPriority(OverlayPriority.MED);
         setPosition(OverlayPosition.BOTTOM_LEFT);
