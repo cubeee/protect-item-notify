@@ -11,8 +11,8 @@ public interface ProtectItemNotifyConfig extends Config
 			keyName = "scale",
 			name = "Scale",
 			description = "The scale of the ring of protect item image.")
-	default int scale() {
-		return 1;
+	default double scale() {
+		return 1.0;
 	}
 
 	@ConfigItem(

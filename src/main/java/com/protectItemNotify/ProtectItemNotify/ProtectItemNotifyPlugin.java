@@ -79,4 +79,8 @@ public class ProtectItemNotifyPlugin extends Plugin
 		}
 		return client.getVarbitValue(VarbitID.INSIDE_WILDERNESS) == 1;
 	}
+
+	protected Client getClient() {
+		return client;
+	}
 }

@@ -54,22 +54,39 @@ public class ProtectItemNotifyOverlay extends Overlay {
         if (previouslyScaledImage.scale == protectItemConfig.scale() || protectItemConfig.scale() <= 0) {
             return previouslyScaledImage.scaledBufferedImage;
         }
-        int w = protectItemImage.getWidth();
-        int h = protectItemImage.getHeight();
+        double width = protectItemImage.getWidth();
+        double height = protectItemImage.getHeight();
+
+        int clientMaxWidth = plugin.getClient().getCanvasWidth();
+        int clientMaxHeight = plugin.getClient().getCanvasHeight();
+
+        double newWidth = width * protectItemConfig.scale();
+        if (newWidth >= clientMaxWidth) {
+            newWidth = clientMaxWidth;
+        }
+
+        double newHeight = height * protectItemConfig.scale();
+        if (newHeight >= clientMaxHeight) {
+            newHeight = clientMaxHeight;
+        }
+
+        double newHeightScale = newHeight / height;
+        double newWidthScale = newWidth / width;
+        double newScale = Math.min(newHeightScale, newWidthScale);
+
         BufferedImage scaledProtectItemImage =
-                new BufferedImage(
-                        protectItemConfig.scale() * w, protectItemConfig.scale() * h, BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage((int) newWidth, (int) newHeight, BufferedImage.TYPE_INT_ARGB);
         AffineTransform at = new AffineTransform();
-        at.scale(protectItemConfig.scale(), protectItemConfig.scale());
+        at.scale(newScale, newScale);
         AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
         scaledProtectItemImage = scaleOp.filter(protectItemImage, scaledProtectItemImage);
         previouslyScaledImage.scaledBufferedImage = scaledProtectItemImage;
-        previouslyScaledImage.scale = protectItemConfig.scale();
+        previouslyScaledImage.scale = newScale;
         return scaledProtectItemImage;
     }
 
     private static class ScaledImage {
-        private int scale;
+        private double scale;
         private BufferedImage scaledBufferedImage;
     }
 
