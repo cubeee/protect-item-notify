@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
-import net.runelite.client.ui.overlay.OverlayPriority;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.util.ImageUtil;
 
@@ -22,7 +21,7 @@ public class ProtectItemNotifyOverlay extends Overlay {
     @Inject
     ProtectItemNotifyOverlay(ProtectItemNotifyPlugin plugin, ProtectItemNotifyConfig config) {
         super(plugin);
-        setPriority(OverlayPriority.MED);
+        setPriority(Overlay.PRIORITY_MED);
         setPosition(OverlayPosition.BOTTOM_LEFT);
         setLayer(OverlayLayer.ALWAYS_ON_TOP);
         this.plugin = plugin;
@@ -33,16 +32,16 @@ public class ProtectItemNotifyOverlay extends Overlay {
     }
 
     private static void loadProtectItemImage() {
-        protectItemImage = ImageUtil.getResourceStreamFromClass(ProtectItemNotifyPlugin.class, "/protect-item.png");
+        protectItemImage = ImageUtil.loadImageResource(ProtectItemNotifyPlugin.class, "/protect-item.png");
     }
 
     @Override
     public Dimension render(Graphics2D graphics) {
-        if (!plugin.isInPVP() && protectItemConfig.pvponly() == true) {
+        if (!plugin.isInWilderness() && protectItemConfig.showPvpOnly()) {
             return null;
         }
 
-        if (!plugin.isProtectItemOn()) {
+        if (plugin.isProtectItemOn()) {
             return null;
         }
 

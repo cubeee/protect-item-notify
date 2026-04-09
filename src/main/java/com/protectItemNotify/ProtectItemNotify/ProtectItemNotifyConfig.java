@@ -19,7 +19,7 @@ public interface ProtectItemNotifyConfig extends Config
 			keyName = "pvponly",
 			name = "PVP Only",
 			description = "Should the plugin only display when in a PVP area.")
-	default boolean pvponly() {
+	default boolean showPvpOnly() {
 		return false;
 	}
 
