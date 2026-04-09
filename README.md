@@ -7,6 +7,8 @@ Enabled in:
 * Bounty Hunter: outside safe zone
 
 Disabled in:
+* Leagues
+* Deadman Mode
 * Fight pits
 * Last Man Standing
 * PvP Worlds: safe zones
