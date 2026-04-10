@@ -37,14 +37,9 @@ public class ProtectItemNotifyOverlay extends Overlay {
 
     @Override
     public Dimension render(Graphics2D graphics) {
-        if (!plugin.isInWilderness() && protectItemConfig.showPvpOnly()) {
+        if (!plugin.isShowIcon()) {
             return null;
         }
-
-        if (plugin.isProtectItemOn()) {
-            return null;
-        }
-
         BufferedImage scaledProtectItemImage = scaleImage(protectItemImage);
         ImageComponent imagePanelComponent = new ImageComponent(scaledProtectItemImage);
         return imagePanelComponent.render(graphics);

@@ -32,11 +32,14 @@ public class ProtectItemNotifyPlugin extends Plugin
 	@Inject
 	private OverlayManager overlayManager;
 
+	@Inject
+	private ProtectItemNotifyConfig config;
+
 	@Getter
     private boolean protectItemOn = true;
 
 	@Getter
-	private boolean isInWilderness = false;
+	private boolean showIcon = false;
 
 	@Override
 	protected void startUp() {
@@ -53,7 +56,7 @@ public class ProtectItemNotifyPlugin extends Plugin
 	public void onGameTick(GameTick event) {
 		this.protectItemOn = client.getVarbitValue(VarbitID.PRAYER_PROTECTITEM) == 1
 				|| client.getVarbitValue(VarbitID.PRAYER_PROTECT_ITEM_R) == 1;
-		this.isInWilderness = isInPVP();
+		this.showIcon = showIcon();
 	}
 
 	@Provides
@@ -61,8 +64,18 @@ public class ProtectItemNotifyPlugin extends Plugin
 		return configManager.getConfig(ProtectItemNotifyConfig.class);
 	}
 
-	private boolean isInPVP() {
+	private boolean showIcon() {
+		if (!config.showPvpOnly()) {
+			return true;
+		}
 		EnumSet<WorldType> worldType = client.getWorldType();
+		if (worldType.contains(WorldType.HIGH_RISK) && config.hideOnHighRisk()) {
+			return false;
+		}
+		return isInPVP(worldType) && !protectItemOn;
+	}
+
+	private boolean isInPVP(EnumSet<WorldType> worldType) {
 		if (worldType.contains(WorldType.DEADMAN)
 				|| worldType.contains(WorldType.SEASONAL)
 				|| worldType.contains(WorldType.TOURNAMENT_WORLD)
