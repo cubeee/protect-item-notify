@@ -79,11 +79,10 @@ public class ProtectItemNotifyPlugin extends Plugin
 		if (worldType.contains(WorldType.DEADMAN)
 				|| worldType.contains(WorldType.SEASONAL)
 				|| worldType.contains(WorldType.TOURNAMENT_WORLD)
-				|| worldType.contains(WorldType.LAST_MAN_STANDING)
 				|| worldType.contains(WorldType.PVP_ARENA)) {
 			// dmm = can't protect
 			// leagues = safe pvp
-			// lms, pvp arena = safe
+			// pvp arena = safe
 			return false;
 		}
 		if (worldType.contains(WorldType.PVP) || worldType.contains(WorldType.HIGH_RISK)) {
