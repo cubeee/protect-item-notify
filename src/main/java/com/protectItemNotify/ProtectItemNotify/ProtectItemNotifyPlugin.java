@@ -65,7 +65,7 @@ public class ProtectItemNotifyPlugin extends Plugin
 	}
 
 	private boolean showIcon() {
-		if (!config.showPvpOnly()) {
+		if (!config.showPvpOnly() && !protectItemOn) {
 			return true;
 		}
 		EnumSet<WorldType> worldType = client.getWorldType();
